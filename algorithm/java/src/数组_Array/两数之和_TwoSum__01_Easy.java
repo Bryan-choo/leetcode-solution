@@ -27,7 +27,7 @@ import javax.sound.midi.Soundbank;
 /*
  *   方式一：
  *      采用双层for 循环依次遍历
- *  方式二:
+ *   方式二:
  *      查找问题可以使用hashmap提高速度，将数组下标作为key, 值作为value, 在查找时，若map中存在满足条件的
  *      数，则可以直接返回下标，若不存在，则将数字存入hashmap中用于下次查找
  */
