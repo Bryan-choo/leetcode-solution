@@ -34,8 +34,8 @@ import java.util.HashMap;
  */
 public class 除法求值_EvaluateDivision_399_Medium {
 	public static void main(String[] args) {
-		String[][] equations = new String[][] { { "a", "e" }, { "b", "e" } };
-		double[] values = new double[] { 4.0, 3.0 };
+		String[][] equations = new String[][] { { "a", "e" }, { "b", "e" }, {"c", "b"} };
+		double[] values = new double[] { 4.0, 3.0, 2.0 };
 		String[][] queries = new String[][] { { "a", "b" }, { "e", "e" }, { "x", "x" } };
 		Solution399 s = new Solution399();
 		double[] result = s.calcEquation(equations, values, queries);
@@ -48,8 +48,15 @@ public class 除法求值_EvaluateDivision_399_Medium {
 class Solution399 {
 	private String find(HashMap<String, String> pred, String p1) {
 		String p = p1;
+		String q = p1;
 		while (pred.containsKey(p)) {
 			p = pred.get(p);
+		}
+//		路径压缩
+		while (pred.containsKey(q) && q != p) {
+			String temp = pred.get(q);
+			pred.put(q, p);
+			q = temp;
 		}
 		return p;
 	}
@@ -133,6 +140,7 @@ class Solution399 {
 				}
 			}
 		}
+		System.out.println(pred.toString());
 		return result;
 	}
 }
