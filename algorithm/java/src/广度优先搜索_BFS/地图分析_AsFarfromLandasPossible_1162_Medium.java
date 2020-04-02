@@ -5,6 +5,7 @@ import java.util.LinkedList;
 public class 地图分析_AsFarfromLandasPossible_1162_Medium {
 
     public static void main(String[] args) {
+
         int[][] grid = new int[][] {{1,0,1},{0,0,0},{1,0,1}};
 //        grid = new int[][]{{1,0,0},{0,0,0},{0,0,0}};
         grid = new int[][]{{1}};
