@@ -28,6 +28,7 @@ class Solution13 {
 
         if (sum <= k)
             ans[0]++;
+        //这里如果无法移动，就需要直接返回了，不能跳过这一格
         else
             return;
 
