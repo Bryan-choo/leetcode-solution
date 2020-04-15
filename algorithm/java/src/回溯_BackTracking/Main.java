@@ -1,6 +1,8 @@
 package 回溯_BackTracking;
 
+import java.math.BigInteger;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -56,27 +58,60 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
 
+        String line1 = sc.nextLine();
+        String line2 = sc.nextLine();
 
-            int n = Integer.valueOf(sc.nextLine());
-            String var = sc.nextLine();
+        String[] lines1 = line1.split(" ");
 
-            String[] vars = var.split(" ");
-            HashMap<Integer, Integer> map = new HashMap<>();
+        int n = Integer.valueOf(lines1[0]);
+        BigInteger bigInteger = BigInteger.valueOf(Long.valueOf(lines1[1]));
 
-            int counts = 0;
+        String[] lines2 = line2.split(" ");
 
-            int len = vars.length;
+        BigInteger cirsum = BigInteger.valueOf(0);
 
-            int[] arrs = Arrays.stream(vars).mapToInt(Integer::valueOf).toArray();
-            List<Integer> ans = new ArrayList<>();
+        List<Long>costs = Arrays.stream(lines2).mapToLong(Long::valueOf).boxed().collect(Collectors.toList());
 
-            getAns(arrs, 0, 0, 0, ans);
+        costs.stream().forEach(r->cirsum.add(BigInteger.valueOf(r)));
 
+        BigInteger cirs = bigInteger.divide(cirsum);
 
-            double[] result = new double[1];
-            ans.stream().forEach(r -> result[0] += r);
-            System.out.println(result[0] / ans.size());
+        BigInteger ans = cirs.multiply(BigInteger.valueOf(n));
 
+        BigInteger left = bigInteger.mod(cirsum);
+
+        BigInteger zero = BigInteger.ZERO;
+        for (Long cost:costs) {
+            if (left.subtract(BigInteger.valueOf(cost)).compareTo(zero) >= 0)
+                ans.add(BigInteger.ONE);
+            else
+                break;
+        }
+        System.out.println(ans.toString());
+
+//        Scanner sc = new Scanner(System.in);
+//
+//
+//            int n = Integer.valueOf(sc.nextLine());
+//            String var = sc.nextLine();
+//
+//            String[] vars = var.split(" ");
+//            HashMap<Integer, Integer> map = new HashMap<>();
+//
+//            int counts = 0;
+//
+//            int len = vars.length;
+//
+//            int[] arrs = Arrays.stream(vars).mapToInt(Integer::valueOf).toArray();
+//            List<Integer> ans = new ArrayList<>();
+//
+//            getAns(arrs, 0, 0, 0, ans);
+//
+//
+//            double[] result = new double[1];
+//            ans.stream().forEach(r -> result[0] += r);
+//            System.out.println(result[0] / ans.size());
+//
 
     }
 
