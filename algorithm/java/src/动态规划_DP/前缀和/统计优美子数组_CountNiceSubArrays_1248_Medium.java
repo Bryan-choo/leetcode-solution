@@ -1,7 +1,10 @@
 package 动态规划_DP.前缀和;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class 统计优美子数组_CountNiceSubArrays_1248_Medium {
 
@@ -20,6 +23,7 @@ class Solution1248 {
 
     public int numberOfSubarrays(int[] nums, int k) {
 
+//        Arrays.stream(nums).boxed().collect(Collectors.toList());
         int len = nums.length;
         if (len == 1)
             return (nums[0] % 2 == 0) ? 0 : 1;

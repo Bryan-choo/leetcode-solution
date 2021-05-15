@@ -1,10 +1,30 @@
 package 动态规划_DP;
 
+import javax.annotation.Resource;
+import javax.xml.ws.Action;
+import java.lang.annotation.*;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@interface Select {
+    String value() default "";
+}
+
+interface UserMapper {
+
+    @Select("select * from t1 where id = #{id}")
+    public String selectsql(int id);
+}
 public class 统计重复个数_CountTheRepetitions_466_Hard {
+
+
 
     public static void main(String[] args) {
 
@@ -23,6 +43,22 @@ public class 统计重复个数_CountTheRepetitions_466_Hard {
 
         System.out.println((end-start)/1000.0);
         System.out.println(ans);
+
+        UserMapper userMapper = (UserMapper) Proxy.newProxyInstance(统计重复个数_CountTheRepetitions_466_Hard.class.getClassLoader(), new Class[]{UserMapper.class}, new InvocationHandler() {
+            @Override
+            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+
+                String sql = method.getAnnotation(Select.class).value();
+                String id = String.valueOf(args[0]);
+                System.out.println(sql.replaceAll("#\\{id\\}", id));
+                String result = (String) method.invoke(proxy, args);
+                return "{id:"+id+"}";
+            }
+        });
+
+        String res = (String) userMapper.selectsql(123);
+        System.out.println(res);
+
     }
 }
 
