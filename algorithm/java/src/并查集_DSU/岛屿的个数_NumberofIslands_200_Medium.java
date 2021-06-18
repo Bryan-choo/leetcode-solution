@@ -16,9 +16,7 @@ public class 岛屿的个数_NumberofIslands_200_Medium {
 class Solution200 {
 	
 	public int bfs(char [][]grid) {
-		Set<Integer> set = new LinkedHashSet<>();
-		List list =new ArrayList(set);
-
+		LinkedList list = new LinkedList();
 		int [][] stats = new int [grid.length][grid[0].length];
     	for (int i = 0; i < stats.length; i++) {
     		for (int j = 0; j < stats[i].length; j++) {
